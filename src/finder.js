@@ -14,5 +14,21 @@
  * 
  */
 module.exports = ( input, test ) => {
+	// always assume input in unsanitized
+	if (input === null || input.length === 0 || test === null) {
+		return null
+	}
 
+	let arr = []
+	input.forEach((item) => {
+		if (item instanceof Array || item instanceof Object) {
+			return
+		}
+
+		if (test(item)) {
+			arr.push(item)
+		}
+	})
+
+	return arr
 };
