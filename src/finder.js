@@ -21,11 +21,9 @@ module.exports = ( input, test ) => {
 
 	let arr = []
 	input.forEach((item) => {
-		if (item instanceof Array || item instanceof Object) {
-			return
-		}
-
-		if (test(item)) {
+		// Since instanceof is a little tricky with empty strings, we can use this robust method
+		// to check object type
+		if (test(item) && Object.prototype.toString.call(item) === '[object String]') {
 			arr.push(item)
 		}
 	})

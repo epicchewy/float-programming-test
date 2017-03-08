@@ -21,12 +21,20 @@
  *   returns: false
  */
 module.exports = ( input ) => {
+	// assume unsanitized input
 	if (input === null || input === '') return false
 
-	const stack = []
-	let include = false // used to check if string has 
+	/*
+	 * My solution utlizes a stack and a dictionary of valid pairings
+	 * It also has an extra boolean to check if any parantheses have been checked
+	 * When it encounters the left-hand side, it will insert it into the stack
+	 * When it encounters its counterpart, pop the stack and check if its the correct pairing
+	 */
 
-	const pairs = {
+	const stack = []
+	let include = false // used to check if string has pairings at all
+
+	const pairs = { // Be sure to account for all types of pairings
 		'(' : ')',
 		'{' : '}',
 		'[' : ']',
@@ -43,7 +51,6 @@ module.exports = ( input ) => {
 				return false
 			}
 		}
-		console.log('STACK: ', stack)
 	}
 
 	return (stack.length === 0) && include
